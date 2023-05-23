@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model LoginViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "My Super Company";
+}
+
+
+<form asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.ReturnUrl" role="form" class="form-horizontal">
+    @Html.AntiForgeryToken()
+    <div class="center-align">
+        <img src="~/images/home-logo-big.png" />
+        <h2 style="color:#00717C">@Localizer["MySuperCompany"]</h2>
+    </div>
+
+    <h1 class="page-title">@Localizer["LogIn"]</h1>
+
+    @Html.HiddenFor(m => m.ReturnUrl, "")
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @if (!@ViewData.ModelState.IsValid)
+    {
+        <script>
+            document.getElementById("SiteOverlay").style.display = "none";
+        </script>
+    }
+
+    <br />
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Localizer["Email"]</label>
+        <div class="col-md-8">
+            <input class="form-control" placeholder="@Localizer["Email"]" class="form-control" asp-for="Email" autofocus>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Localizer["Password"]</label>
+        <div class="col-md-8">
+            <div class="password-wrapper">
+                <input class="pass-input" type="password" placeholder="@Localizer["Password"]" asp-for="Password">
+                <div class="visibility-wrapper">
+                    <span id="show-psw-img" class="visibility visibility-on"></span>
+                </div>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const showPswBtn = document.querySelector(".password-wrapper #show-psw-img");
+            showPswBtn.addEventListener("click", function (event) {
+                const isVisible = !showPswBtn.classList.contains("visibility-on");
+                const passwordInput = document.querySelector(".password-wrapper #Password");
+                if (isVisible) {
+                    passwordInput.type = 'password';
+                    showPswBtn.classList.remove('visibility-off');
+                    showPswBtn.classList.add('visibility-on');
+                } else {
+                    passwordInput.type = 'text';
+                    showPswBtn.classList.remove('visibility-on');
+                    showPswBtn.classList.add('visibility-off');
+
+                }
+            }, false);
+        })();
+    </script>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-8 ">
+            <input type="submit" value="@Localizer["LogIn"]" name="button" id="sbmtBtn" class="btn btn-primary pull-right" />
+        </div>
+    </div>
+    <div class="horizontal-line"></div>
+
+    <div class="login-footer">
+        @Html.ActionLink(Localizer["PasswordQuestion"].Value, "ForgotPassword", new { clientId = Model.ClientId })
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery.validate.min.js"></script>
+    <script src="~/js/login.js"></script>
+}

@@ -1,0 +1,17 @@
+﻿<Window x:Class="DesktopClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="500" Initialized="Window_Initialized">
+    <Grid>
+        <TextBox x:Name="EmailInput" HorizontalAlignment="Left" Margin="204,107,0,0" TextWrapping="Wrap" Text="ikav@softserveinc.com" VerticalAlignment="Top" Width="220"/>
+        <TextBox x:Name="ApiInput" HorizontalAlignment="Left" Margin="204,154,0,0" TextWrapping="Wrap" Text="c7793f36-5a36-4df0-9cee-169fad8f4e49" VerticalAlignment="Top" Width="220"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="144,103,0,0" VerticalAlignment="Top"/>
+        <Label Content="Api key:" HorizontalAlignment="Left" Margin="144,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.494,2.481"/>
+        <Button Content="Login" HorizontalAlignment="Left" Margin="204,217,0,0" VerticalAlignment="Top" Width="67" Click="Button_Click"/>
+        <Button x:Name="ApiCallBtn" Content="Get from API" HorizontalAlignment="Left" Margin="204,262,0,0" VerticalAlignment="Top" Width="149" Click="ApiCallBtn_Click"/>
+    </Grid>
+</Window>

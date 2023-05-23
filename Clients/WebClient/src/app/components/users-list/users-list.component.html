@@ -1,0 +1,26 @@
+<div>
+    <table [dataSource]="usersTableData" mat-table matSort>
+        <ng-container matColumnDef="firstName">
+            <th *matHeaderCellDef disableClear mat-header-cell mat-sort-header>First name</th>
+            <td *matCellDef="let user" mat-cell>
+                {{user.firstName}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <th *matHeaderCellDef disableClear mat-header-cell mat-sort-header>Last name </th>
+            <td *matCellDef="let user" mat-cell>
+                {{user.lastName}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th *matHeaderCellDef disableClear mat-header-cell mat-sort-header>Email</th>
+            <td *matCellDef="let user" mat-cell>
+                {{user.email}}
+            </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row class="row-container"
+            [routerLink]="'/user/' + row.id">
+        </tr>
+    </table>
+</div>

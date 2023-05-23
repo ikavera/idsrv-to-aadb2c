@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="shortcut icon" href="@ViewData["Icon"]">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/company.css" />
+    <link rel="stylesheet" href="~/css/Main.css" />
+</head>
+
+<body>
+
+   
+<div class="login-container">
+    <section class="modal-content login-content ">
+        @RenderBody()
+    </section>
+</div>
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/bootstrap/js/bootstrap.js"></script>
+@RenderSection("Scripts", required: false)
+       
+</body>
+</html>

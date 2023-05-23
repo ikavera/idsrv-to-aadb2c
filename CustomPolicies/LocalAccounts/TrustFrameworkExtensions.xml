@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="scomp5.onmicrosoft.com" 
+  PolicyId="B2C_1A_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://scomp5.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
+  
+  <BasePolicy>
+    <TenantId>scomp5.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+  </BasePolicy>
+  
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <ClaimType Id="identityProviderAccessToken">
+        <DisplayName>Identity Provider Access Token</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>Stores the access token of the identity provider.</AdminHelpText>
+      </ClaimType>
+      <ClaimType Id="identityProviderRefreshToken">
+        <DisplayName>Identity Provider Refresh Token</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>Stores the refresh token of the identity provider.</AdminHelpText>
+      </ClaimType>
+      <ClaimType Id="avatar">
+        <DisplayName>Avatar</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="roleString">
+        <DisplayName>User roles</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="idpObjectId">
+        <DisplayName>Issuer Object ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="idpTenantId">
+        <DisplayName>Issuer Tenant ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="roles">
+        <DisplayName>Consolidated roles collection</DisplayName>
+        <DataType>stringCollection</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="serviceRoles">
+        <DisplayName>Roles from application database</DisplayName>
+        <DataType>stringCollection</DataType>
+        <UserHelpText />
+      </ClaimType>
+      <ClaimType Id="serviceRole">
+        <DisplayName>Single role</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="loginHint">
+        <DisplayName>Login Hint</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="bearerToken">
+        <DisplayName>Bearer token</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="grant_type">
+        <DisplayName>Grant type</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="scope">
+        <DisplayName>scope</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="targetAppId">
+        <DisplayName>appId user is signing into</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="targetSpId">
+        <DisplayName>appId user is signing into</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+      <ClaimType Id="graphAppRoleOutput">
+        <DisplayName>appId user is signing into</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+
+      <ClaimType Id="requiresMigration">
+				<DisplayName>extension_requiresMigration</DisplayName>
+				<DataType>boolean</DataType>
+				<AdminHelpText>extension_requiresMigration</AdminHelpText>
+				<UserHelpText>extension_requiresMigration</UserHelpText>
+			</ClaimType>
+      <!-- Holds the value of the migration status on the Azure AD B2C account -->
+      <ClaimType Id="extension_requiresMigration">
+        <DisplayName>extension_requiresMigration</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>extension_requiresMigration</AdminHelpText>
+        <UserHelpText>extension_requiresMigration</UserHelpText>
+      </ClaimType>
+      <!-- Holds the value of whether the authentication succeeded at the legacy IdP -->
+      <ClaimType Id="tokenSuccess">
+        <DisplayName>tokenSuccess</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>tokenSuccess</AdminHelpText>
+        <UserHelpText>tokenSuccess</UserHelpText>
+      </ClaimType>
+      <!-- Holds the value 'false' when the legacy IdP authentication succeeded -->
+      <ClaimType Id="migrationRequired">
+        <DisplayName>migrationRequired</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>migrationRequired</AdminHelpText>
+        <UserHelpText>migrationRequired</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="tempObjectId">
+        <DisplayName>User's Object ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Object identifier (ID) of the user object in Azure AD.</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="userMessage">
+		    <DisplayName>Error</DisplayName>
+		    <DataType>string</DataType>
+		    <UserInputType>Paragraph</UserInputType>
+	    </ClaimType>
+      
+      <ClaimType Id="isKeyValid">
+        <DisplayName>IsKeyValid</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>isKeyValid</AdminHelpText>
+        <UserHelpText>isKeyValid</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="apiKey">
+        <DisplayName>ApiKey</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>apiKey</AdminHelpText>
+        <UserHelpText>apiKey</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="username">
+        <DisplayName>username</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>username</AdminHelpText>
+        <UserHelpText>username</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="CustomGrantType">
+        <DisplayName>CustomGrantType</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>CustomGrantType</AdminHelpText>
+        <UserHelpText>CustomGrantType</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="identityProviders">
+        <DisplayName>IdentityProviders</DisplayName>
+        <DataType>stringCollection</DataType>
+        <UserHelpText>User identity providers</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="domainParameter">
+        <DisplayName>domainParameter</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>parsed domain value from url</UserHelpText>
+      </ClaimType>
+      <ClaimType Id="firstname">
+        <DisplayName>firstname</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText/>
+      </ClaimType>
+      <ClaimType Id="lastname">
+        <DisplayName>lastname</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText/>
+      </ClaimType>
+
+      <ClaimType Id="extension_mustResetPassword">
+        <DisplayName>Must reset password</DisplayName>
+        <DataType>boolean</DataType>
+        <UserHelpText>Specifies whether user must reset the password</UserHelpText>
+      </ClaimType>
+
+      <!-- Sample: targetEmail is the email of the user originally requested impersonatedUser is the 
+       email value returned from SignInNames.Email from Azure AD after we requested (this is directory data) -->
+      <ClaimType Id="targetEmail">
+        <DisplayName>Sign-in on behalf of</DisplayName>
+        <DataType>string</DataType>
+         <UserHelpText>Email address of the impersonated user</UserHelpText>
+        <UserInputType>EmailBox</UserInputType>
+        <Restriction>
+          <Pattern RegularExpression="^[a-zA-Z0-9.+!#$%&amp;'^_`{}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" HelpText="Please enter a valid email address." />
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="impersonatedUser">
+        <DisplayName>Impersonated account</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText/>
+      </ClaimType>
+      <!--Sample: Indicates whether a user can impersonate (if the value is 1)-->
+      <ClaimType Id="extension_can_impersonate">
+        <DisplayName>Can impersonate</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Add help text here</UserHelpText>
+      </ClaimType>
+
+      <!--Sample: Stores the error message if user can't impersonate-->
+      <ClaimType Id="errorMessage">
+     	  <DisplayName>Error</DisplayName>
+     	  <DataType>string</DataType>
+        <UserHelpText>Add help text here</UserHelpText>
+     	  <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="isForgotPassword">
+        <DisplayName>isForgotPassword</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
+      </ClaimType>
+
+      <ClaimType Id="preferredMfaType">
+        <DisplayName>preferredMfaType</DisplayName>
+        <DataType>int</DataType>
+        <AdminHelpText>preferredMfaType</AdminHelpText>
+        <UserHelpText>Preferred MFA type for user</UserHelpText>
+      </ClaimType>
+
+      <ClaimType Id="extension_preferredMfaType">
+        <DisplayName>extension_preferredMfaType</DisplayName>
+        <DataType>int</DataType>
+        <AdminHelpText>preferredMfaType</AdminHelpText>
+        <UserHelpText>Preferred MFA type for user</UserHelpText>
+      </ClaimType>
+
+      <ClaimType Id="mfaByEmailEnabled">
+        <DisplayName>mfaByEmailEnabled</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>mfaByEmailEnabled</AdminHelpText>
+        <UserHelpText>Whether MFA by email is enabled for current user</UserHelpText>
+      </ClaimType>
+
+      <ClaimType Id="readOnlyEmail">
+        <DisplayName>Email Address</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText />
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
+
+	</ClaimsSchema>
+
+    <ClaimsTransformations>
+      
+       <!--Demo: this claims transformation populates the userMessage with the text we want to show to the end user-->
+      <ClaimsTransformation Id="CreateTheUniqueEmailErrorMessage" TransformationMethod="FormatStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="You aleady have an account with {0} email address" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AssertDesktopAuthIsTrue" TransformationMethod="AssertBooleanClaimIsEqualToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="isKeyValid" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+      </ClaimsTransformation>
+
+      <!--Sample: Initiates the errorMessage claims type with the error message-->
+      <ClaimsTransformation Id="CreateUnsolicitedErrorMessage" TransformationMethod="CreateStringClaim">
+        <InputParameters>
+          <InputParameter Id="value" DataType="string" Value="You are not allowed to impersonate. Please contact your administrator" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="errorMessage" TransformationClaimType="createdClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopySignInNameToReadOnly" TransformationMethod="FormatStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="signInName" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="{0}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="readOnlyEmail" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopyEmailToReadOnly" TransformationMethod="FormatStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="{0}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="readOnlyEmail" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="IsMfaByEmailEnabled" TransformationMethod="AssertNumber">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="preferredMfaType" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="Operator" DataType="string" Value="Equal" />
+          <InputParameter Id="CompareToValue" DataType="int" Value="1" />
+          <InputParameter Id="throwError" DataType="boolean" Value="false" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="mfaByEmailEnabled" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+    </ClaimsTransformations>
+
+  </BuildingBlocks>
+
+  <ClaimsProviders>  
+    <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+          <DisplayName>Email signup</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />            
+            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="local" />
+            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+            <OutputClaim ClaimTypeReferenceId="newUser" />
+
+            <!-- Optional claims, to be collected from the user -->
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+            <OutputClaim ClaimTypeReferenceId="givenName" />
+            <OutputClaim ClaimTypeReferenceId="surName" />
+            <OutputClaim ClaimTypeReferenceId="userPrincipalName" PartnerClaimType="upn" />
+            <OutputClaim ClaimTypeReferenceId="upnUserName" />
+            <OutputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="email" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CopyEmailToReadOnly" />
+          </OutputClaimsTransformations>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="EmailVerifyOnSignIn">
+          <DisplayName>EmailVerifyOnSignIn</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.common.localaccountpasswordreset</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="readOnlyEmail" />
+          </InputClaims>
+          <OutputClaims>
+            <!-- Required claims -->
+            <OutputClaim ClaimTypeReferenceId="isActiveMFASession" DefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="readOnlyEmail" PartnerClaimType="Verified.Email" /> 
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-MFA" />
+        </TechnicalProfile>
+
+         <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">01082ab9-d752-477f-84b4-aba3d0e6ee53</Item>
+            <Item Key="IdTokenAudience">6e883007-312d-4597-bf15-2d80df57c0c2</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="01082ab9-d752-477f-84b4-aba3d0e6ee53" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="6e883007-312d-4597-bf15-2d80df57c0c2" />
+          </InputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserRemoveMustResetPasswordUsingObjectId">
+          <Metadata>
+            <Item Key="Operation">DeleteClaims</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+          </InputClaims>
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="objectId" />
+            <PersistedClaim ClaimTypeReferenceId="extension_mustResetPassword" />            
+          </PersistedClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="extension_mustResetPassword" DefaultValue="true" />
+          </PersistedClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_mustResetPassword" />
+            <OutputClaim ClaimTypeReferenceId="requiresMigration" PartnerClaimType="extension_requiresMigration" />
+            <OutputClaim ClaimTypeReferenceId="preferredMfaType" PartnerClaimType="extension_preferredMfaType" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="IsMfaByEmailEnabled" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Local Account</DisplayName>
+	    <TechnicalProfiles>
+          <TechnicalProfile Id="ForgotPassword">
+          <DisplayName>Forgot your password?</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="isForgotPassword" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+        <TechnicalProfile Id="SelfAsserted-Signin-Email">
+          <DisplayName>Local Account Signin</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="signInName" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="signInName" Required="true" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+			<DisplayName>Local Account SignIn</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
+        <Metadata>
+          <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>
+        </Metadata>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CopySignInNameToReadOnly" />
+          </OutputClaimsTransformations>
+					<ValidationTechnicalProfiles>
+						<!--Add user migration validation technical profiles before login-NonInteractive -->
+
+						<!-- Populate extension_requireMigration into the claims pipeline -->
+						<ValidationTechnicalProfile ReferenceId="Get-requiresMigration-status-signin" ContinueOnError="false" />
+
+						<!-- If extension_requireMigration is true, call the legacy IdP via the REST API -->
+						<ValidationTechnicalProfile ReferenceId="UserMigrationViaLegacyIdp" ContinueOnError="false">
+							<Preconditions>
+								<Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+									<Value>requiresMigration</Value>
+									<Value>False</Value>
+									<Action>SkipThisValidationTechnicalProfile</Action>
+								</Precondition>
+							</Preconditions>
+						</ValidationTechnicalProfile>
+
+						<!-- If the API returned 'tokensuccess', write the new password and unmark the account for migration -->
+						<ValidationTechnicalProfile ReferenceId="AAD-WritePasswordAndFlipMigratedFlag" ContinueOnError="false">
+							<Preconditions>
+								<Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+									<Value>tokenSuccess</Value>
+									<Action>SkipThisValidationTechnicalProfile</Action>
+								</Precondition>
+							</Preconditions>
+						</ValidationTechnicalProfile>
+
+						<!-- Initiate a normal logon against Azure AD B2C -->
+						<ValidationTechnicalProfile ReferenceId="login-NonInteractive" />
+					</ValidationTechnicalProfiles>
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+    <ClaimsProvider>
+			<DisplayName>Local Account SignIn with Desktop key</DisplayName>
+			<TechnicalProfiles>
+        <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Desktop-Key">
+          <DisplayName>REST API call to validate Desktop API key</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <Metadata>
+              <Item Key="ServiceUrl">https://supercompany5.com/WebApiWithAad/api/DesktopValidation/ValidateApiKey</Item>
+              <Item Key="AuthenticationType">None</Item>
+              <Item Key="SendClaimsIn">Body</Item>
+              <Item Key="AllowInsecureAuthInProduction">True</Item>
+            </Metadata>
+            <InputClaims>
+              <InputClaim ClaimTypeReferenceId="username" PartnerClaimType="Email" Required="true" DefaultValue="{OIDC:Username}" />
+              <InputClaim ClaimTypeReferenceId="Password" PartnerClaimType="ApiKey" Required="true" DefaultValue="{OIDC:Password}" />
+              <InputClaim ClaimTypeReferenceId="CustomGrantType" DefaultValue="custom_grant_token" />
+            </InputClaims>
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="isKeyValid" DefaultValue="false"/>
+              <OutputClaim ClaimTypeReferenceId="objectId" />
+            </OutputClaims>
+            <OutputClaimsTransformations>
+              <OutputClaimsTransformation ReferenceId="AssertDesktopAuthIsTrue" />
+            </OutputClaimsTransformations>
+            <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Local Account SignIn - Read migration status</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="Get-requiresMigration-status-signin">
+					<Metadata>
+						<Item Key="Operation">Read</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+						<Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user ID.</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="signInNames.emailAddress" Required="true" />
+					</InputClaims>
+					<OutputClaims>
+						<OutputClaim ClaimTypeReferenceId="objectId" />
+						<!-- Set a default value (false) in the case the account does not have this attribute defined -->
+						<OutputClaim ClaimTypeReferenceId="requiresMigration" PartnerClaimType="extension_requiresMigration" DefaultValue="false" />
+					</OutputClaims>
+					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>REST API to communicate with Legacy IdP</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="UserMigrationViaLegacyIdp">
+					<DisplayName>REST API call to communicate with Legacy IdP</DisplayName>
+					<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+					<Metadata>
+						<Item Key="ServiceUrl">https://supercompany5.com/Authorization2/Account/LoginValidation</Item>
+						<Item Key="AuthenticationType">None</Item>
+						<Item Key="SendClaimsIn">Body</Item>
+						<Item Key="AllowInsecureAuthInProduction">True</Item>
+					</Metadata>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="email" />
+						<InputClaim ClaimTypeReferenceId="password" />
+					</InputClaims>
+					<OutputClaims>
+						<OutputClaim ClaimTypeReferenceId="tokenSuccess" DefaultValue="false"/>
+						<OutputClaim ClaimTypeReferenceId="migrationRequired"/>
+					</OutputClaims>
+					<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Local Account SignIn - Write new password and unmark for migration</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="AAD-WritePasswordAndFlipMigratedFlag">
+					<Metadata>
+						<Item Key="Operation">Write</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+					</InputClaims>
+					<PersistedClaims>
+						<PersistedClaim ClaimTypeReferenceId="objectId" />
+						<PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
+						<PersistedClaim ClaimTypeReferenceId="displayName" />
+						<PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password"/>
+						<PersistedClaim ClaimTypeReferenceId="passwordPolicies" DefaultValue="DisablePasswordExpiration, DisableStrongPassword" AlwaysUseDefaultValue="true"/>
+						<PersistedClaim ClaimTypeReferenceId="extension_requiresMigration" DefaultValue="false" AlwaysUseDefaultValue="true"/>
+					</PersistedClaims>
+					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+					<UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Local Account Password Reset - Read migration flag</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="Get-requiresMigration-status-password-reset">
+					<Metadata>
+						<Item Key="Operation">Read</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+						<Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user ID.</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+					</InputClaims>
+					<OutputClaims>
+						<OutputClaim ClaimTypeReferenceId="requiresMigration" PartnerClaimType="extension_requiresMigration" DefaultValue="false" />
+					</OutputClaims>
+					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Local Account Password Reset - Flip migration flag</DisplayName>
+			<TechnicalProfiles>
+				<TechnicalProfile Id="AAD-FlipMigratedFlag">
+					<Metadata>
+						<Item Key="Operation">Write</Item>
+						<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+					</Metadata>
+					<IncludeInSso>false</IncludeInSso>
+					<InputClaims>
+						<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+					</InputClaims>
+					<PersistedClaims>
+						<PersistedClaim ClaimTypeReferenceId="objectId" />
+            <PersistedClaim ClaimTypeReferenceId="displayName" />
+            <PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
+						<PersistedClaim ClaimTypeReferenceId="migrationRequired" PartnerClaimType="extension_requiresMigration" DefaultValue="false" AlwaysUseDefaultValue="true"/>
+					</PersistedClaims>
+					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+					<UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+				</TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+		<ClaimsProvider>
+			<DisplayName>Local Account Password Reset - Write Password</DisplayName>
+      <TechnicalProfiles>
+				<TechnicalProfile Id="LocalAccountMigrationWritePasswordUsingObjectId">
+          <DisplayName>Seamless migration</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+					<ValidationTechnicalProfiles>
+						<ValidationTechnicalProfile ReferenceId="Get-requiresMigration-status-password-reset" ContinueOnError="false" />
+						<ValidationTechnicalProfile ReferenceId="AAD-FlipMigratedFlag" ContinueOnError="false">
+							<Preconditions>
+								<Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+									<Value>requiresMigration</Value>
+									<Value>False</Value>
+									<Action>SkipThisValidationTechnicalProfile</Action>
+								</Precondition>
+							</Preconditions>
+						</ValidationTechnicalProfile>
+						<ValidationTechnicalProfile ReferenceId="AAD-UserWritePasswordUsingObjectId" />
+					</ValidationTechnicalProfiles>
+				</TechnicalProfile>
+
+        <!--Demo: This technical profile tries to find a local account with provided email address-->
+        <TechnicalProfile Id="AAD-UserReadUsingLocalAccountEmail-NoError">
+          <Metadata>
+            <Item Key="Operation">Read</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames" Required="true" />
+          </InputClaims>
+          <OutputClaims>
+            <!-- Required claims -->
+            <OutputClaim ClaimTypeReferenceId="tempObjectId" PartnerClaimType="objectId"/>
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+        
+        <!--Demo: This technical profile tries to find a social account with provided email address-->
+        <TechnicalProfile Id="AAD-UserReadUsingSocialEmail-NoError">
+          <Metadata>
+            <Item Key="Operation">Read</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="strongAuthenticationEmailAddress" Required="true" />
+          </InputClaims>
+          <OutputClaims>
+            <!-- Required claims -->
+            <OutputClaim ClaimTypeReferenceId="tempObjectId" PartnerClaimType="objectId"/>
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+
+        <!--Demo: this technical profile displays the message to the user-->
+        <TechnicalProfile Id="SelfAsserted-UniqueUserMessage">
+          <DisplayName>Email unique validation</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+            <Item Key="setting.showContinueButton">false</Item>
+            <Item Key="setting.showCancelButton">false</Item>
+          </Metadata>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateTheUniqueEmailErrorMessage" />
+          </InputClaimsTransformations>
+          <InputClaims>
+             <InputClaim ClaimTypeReferenceId="userMessage" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userMessage" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+			</TechnicalProfiles>
+		</ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Azure Active Directory</DisplayName>
+      <TechnicalProfiles>
+        
+        <TechnicalProfile Id="AAD-UserReadUsingObjectId-Impersonation">
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_can_impersonate"/>
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-ImpersonatedUserRead-For-Impersonation">
+          <Metadata>
+            <Item Key="Operation">Read</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+            <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user ID.</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="targetEmail" PartnerClaimType="signInNames" Required="true"/>
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="impersonatedUser" PartnerClaimType="signInNames.emailAddress" /> 
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common"/>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Self Asserted Targeted Email Exchange</DisplayName>
+      <TechnicalProfiles>
+        <!-- Sample: Show error message if user is not allowed to impersonate-->
+          <TechnicalProfile Id="SelfAsserted-ErrorMessage">
+            <DisplayName>Error message</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+            <Metadata>
+              <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+              <!-- Sample: Remove the continue button-->
+              <Item Key="setting.showContinueButton">false</Item>         
+          </Metadata>
+            <InputClaimsTransformations>
+              <InputClaimsTransformation ReferenceId="CreateUnsolicitedErrorMessage" />
+            </InputClaimsTransformations>         
+            <InputClaims>
+              <InputClaim ClaimTypeReferenceId="errorMessage"/>
+            </InputClaims>
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="errorMessage"/>
+            </OutputClaims>
+          </TechnicalProfile>
+
+          <TechnicalProfile Id="SelfAsserted-TargetEmailExchange">
+            <DisplayName>Target Email Page</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+            <Metadata>
+              <Item Key="ContentDefinitionReferenceId">api.common.signin</Item> 
+              <!--Sample:  indicating that claim resolving should be performed. So, we can read the value of {OAUTH-KV:targetEmail} claim resolver -->
+              <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
+              <Item Key="setting.showSignupLink">false</Item>
+            </Metadata>
+            <InputClaims>
+              <!--Sample: read the targetEmail query string parameter e.g. &targetemail=bob@contoso.com -->
+              <InputClaim ClaimTypeReferenceId="targetEmail" DefaultValue="{OAUTH-KV:targetEmail}" AlwaysUseDefaultValue="true"/>
+            </InputClaims>
+            <OutputClaims>
+              <!-- Required claims -->
+              <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true"/>
+              <OutputClaim ClaimTypeReferenceId="impersonatedUser" Required="true"/>
+              <OutputClaim ClaimTypeReferenceId="targetEmail" Required="true"/> 
+            </OutputClaims>
+            <ValidationTechnicalProfiles>
+              <ValidationTechnicalProfile ReferenceId="AAD-ImpersonatedUserRead-For-Impersonation"/>
+            </ValidationTechnicalProfiles>
+          </TechnicalProfile>
+
+          <TechnicalProfile Id="SelfAsserted-TransformImpersonated">
+            <DisplayName>Transform Impersonated User</DisplayName>
+            <Metadata>
+              <Item Key="Operation">Read</Item>
+              <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+              <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user targetEmail.</Item>
+            </Metadata>
+            <IncludeInSso>false</IncludeInSso>
+            <InputClaims>
+              <InputClaim ClaimTypeReferenceId="targetEmail" PartnerClaimType="signInNames.emailAddress" Required="true" />
+            </InputClaims>
+            <OutputClaims>
+              <OutputClaim ClaimTypeReferenceId="objectId" />
+              <OutputClaim ClaimTypeReferenceId="displayName" />
+              <OutputClaim ClaimTypeReferenceId="givenName" />
+              <OutputClaim ClaimTypeReferenceId="surName" />
+              <OutputClaim ClaimTypeReferenceId="otherMails" />
+              <OutputClaim ClaimTypeReferenceId="signInNames.emailAddress" />
+            </OutputClaims>
+            <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+          </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+  </ClaimsProviders>
+  
+
+</TrustFrameworkPolicy>

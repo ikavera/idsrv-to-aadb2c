@@ -1,0 +1,52 @@
+﻿@using System.IO
+@model Auth.Web.UI.Quickstart.Account.TermViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Super Company</title>
+    <link rel="stylesheet" href="~/css/all.min.css" />
+</head>
+@{
+    var service = Context.RequestServices.GetService(typeof(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)) as Microsoft.AspNetCore.Hosting.IWebHostEnvironment;
+    var templatePath = service.WebRootPath + "/Content/Templates/Customer_Terms_Conditions_New.html";
+}
+
+
+<body>
+    <div class="login-container" style="padding:20px 0px 20px 0px;">
+        <div class="modal-content login-content" style="width:800px;">
+            @Html.Raw(File.ReadAllText(templatePath))
+
+            <div>
+                @using (Html.BeginForm("TermsAndConditions", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, true, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.UrlHash)
+                    <div style="margin:0 auto;">
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Agree, true, new { @class = "form-check-input", id = "iAgree" })
+                            <label class="form-check-label" for="iAgree">I agree to the above Terms and Conditions</label>
+                        </div>
+                        <div class="form-check">
+                            @Html.RadioButtonFor(m => m.Agree, false, new { @class = "form-check-input", id = "iDontAgree" })
+                            <label class="form-check-label" for="iDontAgree">I do not agree to the above Terms and Conditions</label>
+                        </div>
+                        <input type="submit" value="Continue" id="sbmtBtn" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>

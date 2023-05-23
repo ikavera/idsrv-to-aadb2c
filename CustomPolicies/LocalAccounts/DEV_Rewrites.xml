@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="scomp5.onmicrosoft.com" 
+  PolicyId="B2C_1A_DEV_Rewrites" 
+  PublicPolicyUri="http://scomp5.onmicrosoft.com/B2C_1A_DEV_Rewrites">
+  
+  <BasePolicy>
+    <TenantId>scomp5.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>Dev env rewrites</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="AAD-Common">
+          <Metadata>
+            <Item Key="ClientId">565a6784-bee7-4f57-a180-a0f65ba71351</Item>
+            <Item Key="ApplicationObjectId">98364dd2-6c4e-469a-ae30-103cdb8a2989</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Desktop-Key">
+          <Metadata>
+            <Item Key="ServiceUrl">https://supercompany5.com/WebApiWithAad/api/DesktopValidation/ValidateApiKey</Item>
+          </Metadata>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="UserMigrationViaLegacyIdp">
+          <Metadata>
+            <Item Key="ServiceUrl">https://supercompany5.com/Authorization2/Account/LoginValidation</Item>
+          </Metadata>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">01082ab9-d752-477f-84b4-aba3d0e6ee53</Item>
+            <Item Key="IdTokenAudience">6e883007-312d-4597-bf15-2d80df57c0c2</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="01082ab9-d752-477f-84b4-aba3d0e6ee53" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="6e883007-312d-4597-bf15-2d80df57c0c2" />
+          </InputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="JwtIssuer">
+          <Metadata>
+            <Item Key="SendTokenResponseBodyWithJsonNumbers">true</Item>
+            <Item Key="token_lifetime_secs">3600</Item>
+            <Item Key="id_token_lifetime_secs">3600</Item>
+            <Item Key="refresh_token_lifetime_secs">1209600</Item>
+            <Item Key="rolling_refresh_token_lifetime_secs">7776000</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+            <Key Id="issuer_refresh_token_key" StorageReferenceId="B2C_1A_TokenEncryptionKeyContainer" />
+          </CryptographicKeys>
+          <InputClaims />
+          <OutputClaims />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SelfAsserted-TargetEmailExchange-China">
+            <Metadata>
+              <Item Key="ContentDefinitionReferenceId">api.common.signin.china</Item> 
+            </Metadata>
+            <IncludeTechnicalProfile ReferenceId="SelfAsserted-TargetEmailExchange"/>
+          </TechnicalProfile>
+
+        <TechnicalProfile Id="LocalAccountDiscoveryUsingEmailAddress-China">
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.common.localaccountpasswordreset.china</Item>
+          </Metadata>
+          <IncludeTechnicalProfile ReferenceId="LocalAccountDiscoveryUsingEmailAddress"/>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="LocalAccountWritePasswordUsingObjectId-China">
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.common.localaccountpasswordreset.china</Item>
+          </Metadata>
+          <IncludeTechnicalProfile ReferenceId="LocalAccountWritePasswordUsingObjectId"/>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+</TrustFrameworkPolicy>
