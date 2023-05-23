@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Super Company</title>
+	<link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<style>
+		div {
+			margin: 0px 0px 0px 0px;
+			padding: 0px 0px 0px 0px;
+		}		
+		body {
+			height: 100%;
+			background-color: #838790;
+		}
+		.login-container {
+			padding-top: 20px;			
+			text-align: center;
+			min-height: 100%;
+		}		
+		.modal-content {
+			border-radius: 0;
+		}		
+		.login-content {
+			margin: auto;
+			max-width: 550px;
+			text-align: left;
+			padding: 30px;
+		}
+		.center-align {
+			text-align: center !important;
+		}
+		.center-align img {
+			width: 200px;
+		}
+		.page-title {
+			margin-top: 10px;
+		}		
+		.intro {
+			display: none;
+		}		
+		.entry-item {
+			margin-bottom: 15px;
+		}
+		.error {
+			color: red;
+		}
+		#api .working {
+			display: none;
+			background:url(data:image/gif;base64,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) no-repeat;height:30px;width:auto;background-position:center bottom
+		}
+        .toggler {
+  			float: right;
+  			padding-right: 10px;
+  			margin-top: -24px;
+  			position: relative;
+  			z-index: 2;
+        }
+		::-ms-reveal {
+    		display: none;
+		}
+		@media only screen and (max-width: 600px){
+			.login-container {
+				width: 100%;
+				display: table;
+				height: 100vh;
+				padding: 0;
+			}
+			.login-content {
+				width: 100%;
+				margin: 0;
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="login-container">
+        <div class="modal-content login-content">
+            <div>
+				<div class="center-align">
+					<img src="https://scomp5commonstorage.blob.core.windows.net/public-docs/img/home-logo.png">
+				</div>
+				<h1 class="page-title">Log In</h1>
+                <div id="api"></div>
+			</div>
+        </div>
+    </div> 
+	<script>
+		$("#api input").addClass("form-control");var nextBtn=$("#next");nextBtn.addClass("btn btn-primary pull-right");nextBtn.parent().css("overflow","auto");$("#targetEmail").prop("readonly",true);
+        function getPwdInputs(){if(document.querySelectorAll)return document.querySelectorAll("input[type='password']");let c=[],b=document.getElementsByTagName("input");for(let a=0;a<b.length;a++)"password"===b[a].type.toLowerCase()&&c.push(b[a]);return c}function makePwdToggler(a){let b=document.createElement("div"),c=document.createElement("span");c.classList.add("fa","fa-eye","toggler"),a.parentNode.replaceChild(b,a),b.appendChild(a),b.appendChild(c),c.addEventListener("click",function(){"password"===a.type?(a.type="text",c.classList.add("fa-eye-slash")):(a.type="password",c.classList.remove("fa-eye-slash"))})}function setupPwdTogglers(){let b=getPwdInputs();for(let a=0;a<b.length;a++)makePwdToggler(b[a])}setupPwdTogglers()
+	</script>
+</body>
+</html>
